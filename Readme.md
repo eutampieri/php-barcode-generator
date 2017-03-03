@@ -8,12 +8,16 @@ It creates SVG, PNG, JPG and HTML images, from the most used 1D barcode standard
 *The codebase is largely from the [TCPDF barcode generator](https://github.com/tecnickcom/TCPDF) by Nicola Asuni. This code is therefor licensed under LGPLv3. It is still a bit of a mess, bit I will clean it in the future. I do not expect the interface of this class will change during the clean ups.*
 
 ## Installation
-Just clone the repo and `include` required modules.
+Just clone the repo and `include` or `require` required modules.
+```php
+require "BarcodeGenerator.php";
+require "BarcodeGeneratorSVG.php";//Or any other format...
+```
 ## Usage
 Initiate the barcode generator for the output you want, then call the ->getBarcode() routine as many times as you want.
 
 ```php
-$generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+$generator = new BarcodeGeneratorHTML();
 echo $generator->getBarcode('081231723897', $generator::TYPE_CODE_128);
 ```
 
@@ -26,10 +30,10 @@ The ->getBarcode() routine accepts the following:
 
 ## Image types
 ```php
-$generatorSVG = new Picqer\Barcode\BarcodeGeneratorSVG();
-$generatorPNG = new Picqer\Barcode\BarcodeGeneratorPNG();
-$generatorJPG = new Picqer\Barcode\BarcodeGeneratorJPG();
-$generatorHTML = new Picqer\Barcode\BarcodeGeneratorHTML();
+$generatorSVG = new BarcodeGeneratorSVG();
+$generatorPNG = new BarcodeGeneratorPNG();
+$generatorJPG = new BarcodeGeneratorJPG();
+$generatorHTML = new BarcodeGeneratorHTML();
 ```
 
 ## Accepted types
@@ -68,6 +72,6 @@ $generatorHTML = new Picqer\Barcode\BarcodeGeneratorHTML();
 Embedded PNG image in HTML:
 
 ```php
-$generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+$generator = new \BarcodeGeneratorPNG();
 echo '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode('081231723897', $generator::TYPE_CODE_128)) . '">';
 ```
