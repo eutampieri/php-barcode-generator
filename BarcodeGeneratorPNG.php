@@ -1,12 +1,11 @@
 <?php
 
-namespace Picqer\Barcode;
 
-class BarcodeGeneratorJPG extends BarcodeGenerator
+class BarcodeGeneratorPNG extends BarcodeGenerator
 {
 
     /**
-     * Return a JPG image representation of barcode (requires GD or Imagick library).
+     * Return a PNG image representation of barcode (requires GD or Imagick library).
      *
      * @param string $code code to print
      * @param string $type type of barcode:
@@ -27,15 +26,15 @@ class BarcodeGeneratorJPG extends BarcodeGenerator
         if (function_exists('imagecreate')) {
             // GD library
             $imagick = false;
-            $jpg = imagecreate($width, $height);
-            $colorBackground = imagecolorallocate($jpg, 255, 255, 255);
-            imagecolortransparent($jpg, $colorBackground);
-            $colorForeground = imagecolorallocate($jpg, $color[0], $color[1], $color[2]);
+            $png = imagecreate($width, $height);
+            $colorBackground = imagecolorallocate($png, 255, 255, 255);
+            imagecolortransparent($png, $colorBackground);
+            $colorForeground = imagecolorallocate($png, $color[0], $color[1], $color[2]);
         } elseif (extension_loaded('imagick')) {
             $imagick = true;
             $colorForeground = new \imagickpixel('rgb(' . $color[0] . ',' . $color[1] . ',' . $color[2] . ')');
-            $jpg = new \Imagick();
-            $jpg->newImage($width, $height, 'none', 'jpg');
+            $png = new \Imagick();
+            $png->newImage($width, $height, 'none', 'png');
             $imageMagickObject = new \imagickdraw();
             $imageMagickObject->setFillColor($colorForeground);
         } else {
@@ -53,7 +52,7 @@ class BarcodeGeneratorJPG extends BarcodeGenerator
                 if ($imagick && isset($imageMagickObject)) {
                     $imageMagickObject->rectangle($positionHorizontal, $y, ($positionHorizontal + $bw), ($y + $bh));
                 } else {
-                    imagefilledrectangle($jpg, $positionHorizontal, $y, ($positionHorizontal + $bw) - 1, ($y + $bh),
+                    imagefilledrectangle($png, $positionHorizontal, $y, ($positionHorizontal + $bw) - 1, ($y + $bh),
                         $colorForeground);
                 }
             }
@@ -61,11 +60,11 @@ class BarcodeGeneratorJPG extends BarcodeGenerator
         }
         ob_start();
         if ($imagick && isset($imageMagickObject)) {
-            $jpg->drawImage($imageMagickObject);
-            echo $jpg;
+            $png->drawImage($imageMagickObject);
+            echo $png;
         } else {
-            imagejpeg($jpg);
-            imagedestroy($jpg);
+            imagepng($png);
+            imagedestroy($png);
         }
         $image = ob_get_clean();
 

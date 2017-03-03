@@ -1,7 +1,5 @@
 <?php
 
-namespace Picqer\Barcode;
-
 class BarcodeGeneratorHTML extends BarcodeGenerator
 {
 

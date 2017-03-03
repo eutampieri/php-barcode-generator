@@ -1,6 +1,5 @@
 <?php
 
-namespace Picqer\Barcode;
 
 class BarcodeGeneratorSVG extends BarcodeGenerator
 {
