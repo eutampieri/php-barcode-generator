@@ -4,7 +4,7 @@ The goal of this fork is to provide an easy to use, non-bloated, framework indep
 
 It creates SVG, PNG, JPG and HTML images, from the most used 1D barcode standards.
 
-*The codebase is largely from the [TCPDF barcode generator](https://github.com/tecnickcom/TCPDF) by Nicola Asuni. This code is therefor licensed under LGPLv3. It is still a bit of a mess, bit I will clean it in the future. I do not expect the interface of this class will change during the clean ups.*
+*The codebase is largely from the [TCPDF barcode generator](https://github.com/tecnickcom/TCPDF) by Nicola Asuni.*
 
 ## Installation
 Just clone the repo and `include` or `require` required modules.
@@ -71,6 +71,6 @@ $generatorHTML = new BarcodeGeneratorHTML();
 Embedded PNG image in HTML:
 
 ```php
-$generator = new \BarcodeGeneratorPNG();
+$generator = new BarcodeGeneratorPNG();
 echo '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode('081231723897', $generator::TYPE_CODE_128)) . '">';
 ```
